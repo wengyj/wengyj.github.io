@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wengyj.github.io","root":"/","scheme":"Muse","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="本文是金融结构与非金融企业“去杠杆”（谭小芬，李源，王可心，中国工业经济，2019年第2期）的一篇笔记。 有关背景当开始着手考察一个问题时，会遇到这样的问题，如何使得实证部分相对完整，对所考察问题提供尽可能确切的、直接的和全面的回答。开展研究的思路可以有多方面的考虑，下面这一篇文章，提供了一套可行的模式。 去杠杆是近年来的经济政策的主题之一，不少研究将杠杆水平和金融危机联系起来，并且经常采用M2&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实证检验的展开1">
+<meta property="og:url" content="http://wengyj.github.io/2019/economicspapereconometrictan2019/index.html">
+<meta property="og:site_name" content="庭燎">
+<meta property="og:description" content="本文是金融结构与非金融企业“去杠杆”（谭小芬，李源，王可心，中国工业经济，2019年第2期）的一篇笔记。 有关背景当开始着手考察一个问题时，会遇到这样的问题，如何使得实证部分相对完整，对所考察问题提供尽可能确切的、直接的和全面的回答。开展研究的思路可以有多方面的考虑，下面这一篇文章，提供了一套可行的模式。 去杠杆是近年来的经济政策的主题之一，不少研究将杠杆水平和金融危机联系起来，并且经常采用M2&#x2F;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-02-08T16:00:00.000Z">
+<meta property="article:modified_time" content="2019-02-10T08:18:32.000Z">
+<meta property="article:author" content="Wengyj">
+<meta property="article:tag" content="计量经济学">
+<meta property="article:tag" content="去杠杆">
+<meta property="article:tag" content="国际比较">
+<meta property="article:tag" content="金融结构">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://wengyj.github.io/2019/economicspapereconometrictan2019/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>实证检验的展开1 | 庭燎</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">庭燎</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">阅读、回忆和记录</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E5%85%B3%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">有关背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E7%9A%84%E5%A4%84%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">文章的处理</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wengyj</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">151</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button animated"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wengyj" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wengyj" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/wengyjcz" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;wengyjcz" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://wengyj.github.io/2019/economicspapereconometrictan2019/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Wengyj">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="庭燎">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          实证检验的展开1
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-02-09 00:00:00" itemprop="dateCreated datePublished" datetime="2019-02-09T00:00:00+08:00">2019-02-09</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-02-10 16:18:32" itemprop="dateModified" datetime="2019-02-10T16:18:32+08:00">2019-02-10</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BB%8F%E6%B5%8E%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">经济学</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2019/economicspapereconometrictan2019/" class="post-meta-item leancloud_visitors" data-flag-title="实证检验的展开1" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/economicspapereconometrictan2019/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/economicspapereconometrictan2019/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><strong>本文是<a target="_blank" rel="noopener" href="http://www.ciejournal.org/Magazine/show/?id=55404">金融结构与非金融企业“去杠杆”</a>（谭小芬，李源，王可心，中国工业经济，2019年第2期）的一篇笔记。</strong></p>
+<h2 id="有关背景"><a href="#有关背景" class="headerlink" title="有关背景"></a>有关背景</h2><p>当开始着手考察一个问题时，会遇到这样的问题，如何使得实证部分相对完整，对所考察问题提供尽可能确切的、直接的和全面的回答。开展研究的思路可以有多方面的考虑，下面这一篇文章，提供了一套可行的模式。</p>
+<p>去杠杆是近年来的经济政策的主题之一，不少研究将杠杆水平和金融危机联系起来，并且经常采用M2/GDP这样的指标来衡量宏观杠杆率水平。从而衍生出一种争论，对于不同金融发展阶段、金融结构（特别是间接融资占比）的国家，杠杆率水平的合意范围存在差异，从而各国之间的宏观杠杆率的直接比较不一定有意义。按照最为直接的思路，检验这种观点，可以直接采用各国直接/间接融资的相对比重，与其杠杆率做比较。但是这种简单直接的思路还难以支撑起一篇文章，还需要更多的工作，而谭小芬等（2019）这篇文章，则展示了一套完整的思路。</p>
+<h2 id="文章的处理"><a href="#文章的处理" class="headerlink" title="文章的处理"></a>文章的处理</h2><p><em>数据选择。</em> 数据的选择实际上与思路的展开紧密相关，文章更为明显。做为最主要的考察指标，杠杆率采用的是47个国家的上市非金融企业数据。在金融结构指标方面，并非局限于某一特定的结构（如间接融资占比），而是从金融市场化的角度出发，招了多个指标，并采用主成分分析的方法降维（不过从指标选取上看，更倾向于银行体系和股票市场的比较，或许与数据源有关）。第三项数据是行业层面的数据，用以度量行业研发强度，文章一种有趣的处理是，行业研发强度统一采用美国上市企业计算出来的数据。</p>
+<p><em>假设和模型。</em> 文章遵循假说-检验的方式开展，一共考虑的四个假设，假设展现了全文检验的基本框架。由于采用了企业层面的数据，4个假说大致可以分为1）基本假设，平均意义上考察核心问题，即金融结构和企业杠杆率，同时除了一般意义的杠杆率，还区分了债务的期限；2）国家层面特征的影响；3）行业层面特征的影响；4）企业层面特征的影响。模型设置上是一般的固定效应面板模型，对于后面三个假设，处理为相对于基准情况下金融结构影响系数的差异，采用交互项的形式进行检验。此外，控制变量的处理上，除了企业层面的个体效应和时间效应，还增加了行业-时间效应和国家-时间效应（讨论3和4时，均采用虚拟变量）。</p>
+<pre><code>假说1 在其他条件不变的情况下，一国金融结构市场化程度的增强在促使国内非金融企业杠杆率下降的同时会增加企业债务期限。
+模型 xtreg lev l.finstr l.size l.roa l.tang l.growth l.taxrate save GDP CPI M2G budget FD IQ  GDPstr yr* asec*, vce(cluster id) fe
+其中lve是企业当期的杠杆率，finstr是各国当期的金融结构，其余均是控制变量。
+假说2 在其他条件不变的情况下，金融结构对企业杠杆率的影响会随着一国储蓄率、经济增长模式、金融发展程度和制度环境的不同而发生变化。
+模型 xtreg lev l.finstr finstr_FD $X yr* asec*, vce(cluster id) fe
+其中 X是前述的一组控制变量，FD是所考察的国家特征，finstr_FD是交互项，假说3和4的模型也是类似的。
+假说3 金融结构对企业杠杆率的影响在不同行业间具有差异性，金融结构市场化程度的增加对创新型行业杠杆率的影响要显著大于其他行业。
+假说4 金融结构对企业杠杆率的负向影响在高杠杆企业中表现得更为显著，同时二者之间的关系还会随企业股权结构、规模和盈利水平的不同而发生变化。</code></pre>
+<p><em>稳健性检验。</em> 文章采用了稳健性检验常用的几种方式，替代变量（采用金融结构的各项指标而不是第一主成分），改变估计方法（原文模型估计中采用企业聚类，此处采用国家聚类），改变样本（剔除企业较多的国家）。</p>
+<p>总的来看，文章展现了一种实证研究开展的思路，对于国际比较的话题，选取多国企业数据，采用区分基准情况、国家、行业、企业特征的展开框架。此外，文章对金融结构指标的构造、对杠杆率指标的进一步拆分以及稳健性检验均有可借鉴之处。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Wengyj
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://wengyj.github.io/2019/economicspapereconometrictan2019/" title="实证检验的展开1">http://wengyj.github.io/2019/economicspapereconometrictan2019/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E9%87%8F%E7%BB%8F%E6%B5%8E%E5%AD%A6/" rel="tag"># 计量经济学</a>
+              <a href="/tags/%E5%8E%BB%E6%9D%A0%E6%9D%86/" rel="tag"># 去杠杆</a>
+              <a href="/tags/%E5%9B%BD%E9%99%85%E6%AF%94%E8%BE%83/" rel="tag"># 国际比较</a>
+              <a href="/tags/%E9%87%91%E8%9E%8D%E7%BB%93%E6%9E%84/" rel="tag"># 金融结构</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/lifereading032018/" rel="prev" title="读书的事（十一）">
+                  <i class="fa fa-chevron-left"></i> 读书的事（十一）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/economicspapereconometriclin2019/" rel="next" title="实证检验的展开2">
+                  实证检验的展开2 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wengyj</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({
+      el  : '#valine-comments',
+      path: "/2019/economicspapereconometrictan2019/",
+    }, {"enable":true,"appId":"a8du6jfF6hsydDIgU0zzsoAn-gzGzoHsz","appKey":"aLbVejr5tVXlllYcnTCauB1h","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-cn","visitor":true,"comment_count":true,"recordIP":true,"serverURLs":null,"enableQQ":false,"requiredFields":["mail"]}
+    ));
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

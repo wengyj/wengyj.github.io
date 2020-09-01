@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wengyj.github.io","root":"/","scheme":"Muse","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="粤港澳大湾区的提法提了一年多，最终出来了一个规划，市场反映热烈，其实这个规划与以往最为不同的，是在于将香港、澳门和内地城市放到一起进行规划。 粤港澳大湾区规划的特征如何，不同城市的重要性，至少是在规划中的重要性有什么差异，通过分词可以提供一个量化的视角。本文的分词分成以下两步骤：1）在规划文本中选取涉及某个城市的句子，由于自贸区在近几年推进改革开放有重要意义，也是大湾区改革方面的核心，因此广州、深">
+<meta property="og:type" content="article">
+<meta property="og:title" content="粤港澳大湾区规划中的城市关键词">
+<meta property="og:url" content="http://wengyj.github.io/2019/playsouthchinaplanseg2019/index.html">
+<meta property="og:site_name" content="庭燎">
+<meta property="og:description" content="粤港澳大湾区的提法提了一年多，最终出来了一个规划，市场反映热烈，其实这个规划与以往最为不同的，是在于将香港、澳门和内地城市放到一起进行规划。 粤港澳大湾区规划的特征如何，不同城市的重要性，至少是在规划中的重要性有什么差异，通过分词可以提供一个量化的视角。本文的分词分成以下两步骤：1）在规划文本中选取涉及某个城市的句子，由于自贸区在近几年推进改革开放有重要意义，也是大湾区改革方面的核心，因此广州、深">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://od.lk/s/NTNfMTE2Mzg4NzVf/%E9%A6%99%E6%B8%AF.jpg">
+<meta property="og:image" content="https://od.lk/s/NTNfMTE2Mzg4Njhf/%E6%BE%B3%E9%97%A8.jpg">
+<meta property="og:image" content="https://od.lk/s/NTNfMTE2Mzg4NzFf/%E5%B9%BF%E5%B7%9E.jpg">
+<meta property="og:image" content="https://od.lk/s/NTNfMTE2Mzg4NzRf/%E6%B7%B1%E5%9C%B3.jpg">
+<meta property="og:image" content="https://od.lk/s/NTNfMTE2Mzg4Nzhf/%E7%8F%A0%E6%B5%B7.jpg">
+<meta property="og:image" content="https://od.lk/s/NTNfMTE2Mzg4NzBf/%E4%BD%9B%E5%B1%B1.jpg">
+<meta property="og:image" content="https://od.lk/s/NTNfMTE2Mzg4Njlf/%E4%B8%9C%E8%8E%9E.jpg">
+<meta property="og:image" content="https://od.lk/s/NTNfMTE2Mzg4Nzdf/%E4%B8%AD%E5%B1%B1.jpg">
+<meta property="og:image" content="https://od.lk/s/NTNfMTE2Mzg4NzJf/%E6%83%A0%E5%B7%9E.jpg">
+<meta property="og:image" content="https://od.lk/s/NTNfMTE2Mzg4NzNf/%E6%B1%9F%E9%97%A8.jpg">
+<meta property="og:image" content="https://od.lk/s/NTNfMTE2Mzg4NzZf/%E8%82%87%E5%BA%86.jpg">
+<meta property="article:published_time" content="2019-02-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2019-02-24T15:15:56.000Z">
+<meta property="article:author" content="Wengyj">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="中文分词">
+<meta property="article:tag" content="粤港澳大湾区">
+<meta property="article:tag" content="规划">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://od.lk/s/NTNfMTE2Mzg4NzVf/%E9%A6%99%E6%B8%AF.jpg">
+
+
+<link rel="canonical" href="http://wengyj.github.io/2019/playsouthchinaplanseg2019/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>粤港澳大湾区规划中的城市关键词 | 庭燎</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">庭燎</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">阅读、回忆和记录</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wengyj</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">151</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button animated"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wengyj" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wengyj" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/wengyjcz" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;wengyjcz" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://wengyj.github.io/2019/playsouthchinaplanseg2019/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Wengyj">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="庭燎">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          粤港澳大湾区规划中的城市关键词
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-02-23 00:00:00" itemprop="dateCreated datePublished" datetime="2019-02-23T00:00:00+08:00">2019-02-23</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-02-24 23:15:56" itemprop="dateModified" datetime="2019-02-24T23:15:56+08:00">2019-02-24</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/R%E5%92%8C%E5%85%B6%E4%BB%96/" itemprop="url" rel="index"><span itemprop="name">R和其他</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2019/playsouthchinaplanseg2019/" class="post-meta-item leancloud_visitors" data-flag-title="粤港澳大湾区规划中的城市关键词" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/playsouthchinaplanseg2019/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/playsouthchinaplanseg2019/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>粤港澳大湾区的提法提了一年多，最终出来了一个规划，市场反映热烈，其实这个规划与以往最为不同的，是在于将香港、澳门和内地城市放到一起进行规划。</p>
+<p>粤港澳大湾区规划的特征如何，不同城市的重要性，至少是在规划中的重要性有什么差异，通过分词可以提供一个量化的视角。本文的分词分成以下两步骤：1）在规划文本中选取涉及某个城市的句子，由于自贸区在近几年推进改革开放有重要意义，也是大湾区改革方面的核心，因此广州、深圳、珠海的统计加上南沙、前海、横琴的数据。2）对选出的句子按城市分组，每一组句子不重复，但不同组之间句子存在重复，再进行分词。分词前加入部分本规划常出现的专用词，分词后删去停用词，包括一些规划中经常有到的推进、支持、探索，然后按城市分组统计分词情况，统计词频并输出词云。</p>
+<table>
+<thead>
+<tr>
+<th>城市</th>
+<th>次数（句子）</th>
+<th>次数（词）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>香港</td>
+<td>76</td>
+<td>94</td>
+</tr>
+<tr>
+<td>澳门</td>
+<td>70</td>
+<td>85</td>
+</tr>
+<tr>
+<td>深圳</td>
+<td>40</td>
+<td>35</td>
+</tr>
+<tr>
+<td>广州</td>
+<td>38</td>
+<td>40</td>
+</tr>
+<tr>
+<td>珠海</td>
+<td>31</td>
+<td>19</td>
+</tr>
+<tr>
+<td>佛山</td>
+<td>9</td>
+<td>8</td>
+</tr>
+<tr>
+<td>中山</td>
+<td>8</td>
+<td>7</td>
+</tr>
+<tr>
+<td>东莞</td>
+<td>7</td>
+<td>7</td>
+</tr>
+<tr>
+<td>江门</td>
+<td>7</td>
+<td>6</td>
+</tr>
+<tr>
+<td>惠州</td>
+<td>6</td>
+<td>5</td>
+</tr>
+<tr>
+<td>肇庆</td>
+<td>5</td>
+<td>4</td>
+</tr>
+</tbody></table>
+<ul>
+<li>从各城市提及的次数上看，香港、澳门涉及句子均超过70，远超过第三名的40，如果从词语提到的次数上，频率均在第三名的2倍以上，其实还有很多“港澳”这样的字眼，可以看到，港澳两地的地位确实十分特殊。</li>
+<li>规划中提到了4个中心城市，规划中略有差异，除了香港、澳门提及次数远远高于其他，另外就是珠海，广州、深圳、珠海涉及句子都在30-40之间，但是提及珠海次数只有19次，仅为广州、深圳的一半，主要是相当部分涉及珠海的内容直接提交横琴，一方面是自贸区的特殊地位，另一方面珠海的定位与澳门紧密关联。</li>
+<li>实际上还有一处有意思的地方，各城市按句子统计提及次数的排序和按词语统计基本一致，唯一不同的一处在于深圳和广州，提及深圳的句子对于广州，但是“广州”一词出现次数更多。</li>
+</ul>
+<a id="more"></a>
+
+<p><img src="https://od.lk/s/NTNfMTE2Mzg4NzVf/%E9%A6%99%E6%B8%AF.jpg" alt="香港"><br><img src="https://od.lk/s/NTNfMTE2Mzg4Njhf/%E6%BE%B3%E9%97%A8.jpg" alt="澳门"><br><img src="https://od.lk/s/NTNfMTE2Mzg4NzFf/%E5%B9%BF%E5%B7%9E.jpg" alt="广州"><br><img src="https://od.lk/s/NTNfMTE2Mzg4NzRf/%E6%B7%B1%E5%9C%B3.jpg" alt="深圳"><br><img src="https://od.lk/s/NTNfMTE2Mzg4Nzhf/%E7%8F%A0%E6%B5%B7.jpg" alt="珠海"><br><img src="https://od.lk/s/NTNfMTE2Mzg4NzBf/%E4%BD%9B%E5%B1%B1.jpg" alt="佛山"><br><img src="https://od.lk/s/NTNfMTE2Mzg4Njlf/%E4%B8%9C%E8%8E%9E.jpg" alt="东莞"><br><img src="https://od.lk/s/NTNfMTE2Mzg4Nzdf/%E4%B8%AD%E5%B1%B1.jpg" alt="中山"><br><img src="https://od.lk/s/NTNfMTE2Mzg4NzJf/%E6%83%A0%E5%B7%9E.jpg" alt="惠州"><br><img src="https://od.lk/s/NTNfMTE2Mzg4NzNf/%E6%B1%9F%E9%97%A8.jpg" alt="江门"><br><img src="https://od.lk/s/NTNfMTE2Mzg4NzZf/%E8%82%87%E5%BA%86.jpg" alt="肇庆"></p>
+<ul>
+<li>总体上看，规划有两个方面的特点，一是主要词语是地名，并且多数地区存在联系，二是十分强调创新，显示的前20个关键词中，几乎都出现创新，唯一的例外是佛山，但提到转型。</li>
+<li>如前所述，香港、澳门是规划的重点，经常同时提起，澳门组中第二是香港，香港组中第二是澳门。其他地域的联系上，香港强调深圳、广州、国际，澳门涉及横琴、深圳、广州、葡语，经济领域香港提及基金、服务、投资等金融、服务业，澳门提及旅游、服务。</li>
+<li>广州和深圳在定位上存在错位，但从关键词上看，似乎有许多接近的地方。与广州联系的地域，主要是深圳、香港、南沙，还部分涉及澳门和珠海，深圳则是广州、香港、前海，也涉及澳门和珠海，并提到深港，除了各自的自贸区，几乎一致。其他方面，两地都提到了青年、创业、机场、国际。</li>
+<li>珠海也颇有些特点，提及横琴的次数（22）多于珠海（19），相关的地域依次是横琴、澳门、广州、深圳，尽管有港珠澳大桥，似乎提及香港的不多，提到了港澳。其他词语中，提到机动车、口岸，主要还是与港澳的融合、往来的便利化方面。</li>
+<li>佛山和东莞。佛山比较特别的地方在于提到较多的词语都是地名，前9个词语中7个是地名，从第二名开始分别是香港、东莞、珠海、深圳、澳门、广州，除了城市间的联系，更多是政策安排上与其他地区相同。东莞处于广州深圳之间，经济规模也接近佛山，远高于其他城市，但从词云上看，和中山、惠州、江门几乎一致。</li>
+<li>肇庆。肇庆提及的次数最少，仅有5次，其经济实力于大湾区中也是最后一位，提及肇庆的句子中，广州和铁路出现的次数最多，肇庆主要以从属的地位出现。关键词中也有一些很是特别，除了前面的铁路，还出现了仅有的一个农产品。</li>
+<li>其他4个城市。其他4个城市除了各自城市名称在词云中重要性有所不同，主要词语几乎是一致的，港澳、青年、创新、创业、基地。因为“支持港澳青年和中小微企业在内地发展，将符合条件的港澳创业者纳入当地创业补贴扶持范围”一句提及多个港澳青年创新/创业基地。</li>
+</ul>
+<p>前文分析了从规划文本关键词的视角对大湾区规划的理解，尤其是对各城市特点差异的理解。但总体来看，这种方法在衡量城市的重要性更为有效，衡量城市特征可能存在一定缺陷。城市分组的词频统计中，多次出现其他城市，可能是两个城市之间往来密切，规划中统一安排以达到融合发展，但也可能是两者具有某些相同特征，共享一项政策（比如惠州和肇庆）。此外，对于提及次数较少的城市，难以从词频统计获取特征信息，东莞、中山、惠州、江门最主要词语几乎都是一致的，只是来自同一句话，描述差异性的语句反倒在词频统计中不明显。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> docx</span><br><span class="line">dmt=docx.Document(<span class="string">&#x27;plan.docx&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">txtseg</span>(<span class="params">docmt,keyword1,keyword2=<span class="string">&#x27;&#x27;</span></span>):</span></span><br><span class="line">    list1=[]</span><br><span class="line">    list2=[]</span><br><span class="line">    list3=[]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> para <span class="keyword">in</span> docmt.paragraphs:</span><br><span class="line">        a=para.text.find(keyword1)</span><br><span class="line">        <span class="keyword">if</span> len(keyword2)&gt;<span class="number">0</span>:</span><br><span class="line">            b=para.text.find(keyword2)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            b=<span class="number">0</span>        </span><br><span class="line">        <span class="keyword">if</span> a&gt;<span class="number">0</span>:</span><br><span class="line">            list1.append(para.text)</span><br><span class="line">        <span class="keyword">if</span> (a&gt;<span class="number">0</span>)|(b&gt;<span class="number">0</span>):</span><br><span class="line">            list2.append(para.text)</span><br><span class="line">    <span class="keyword">for</span> para <span class="keyword">in</span> list2:</span><br><span class="line">        sp=para.split(<span class="string">&#x27;。&#x27;</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> sp:</span><br><span class="line">            c1=i.find(keyword1)</span><br><span class="line">            <span class="keyword">if</span> len(keyword2)&gt;<span class="number">0</span>:</span><br><span class="line">                c2=i.find(keyword2)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                c2=<span class="number">0</span></span><br><span class="line">            <span class="keyword">if</span> (c1&gt;<span class="number">0</span>)|(c2&gt;<span class="number">0</span>):</span><br><span class="line">                list3.append(i)</span><br><span class="line">                </span><br><span class="line">    <span class="keyword">return</span> list1,list2,list3</span><br><span class="line"></span><br><span class="line">keylist1=[<span class="string">u&#x27;广州&#x27;</span>,<span class="string">u&#x27;深圳&#x27;</span>,<span class="string">u&#x27;珠海&#x27;</span>,<span class="string">u&#x27;香港&#x27;</span>,<span class="string">u&#x27;澳门&#x27;</span>,<span class="string">u&#x27;佛山&#x27;</span>,<span class="string">u&#x27;东莞&#x27;</span>,<span class="string">u&#x27;中山&#x27;</span>,<span class="string">u&#x27;惠州&#x27;</span>,<span class="string">u&#x27;江门&#x27;</span>,<span class="string">u&#x27;肇庆&#x27;</span>]</span><br><span class="line">keylist2=[<span class="string">u&#x27;南沙&#x27;</span>,<span class="string">u&#x27;前海&#x27;</span>,<span class="string">u&#x27;横琴&#x27;</span>]</span><br><span class="line"></span><br><span class="line">reslist=[]</span><br><span class="line">streslist=[]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">11</span>):</span><br><span class="line">    <span class="keyword">if</span> i&lt;<span class="number">3</span>:</span><br><span class="line">        res=txtseg(dmt,keylist1[i],keylist2[i])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        res=txtseg(dmt,keylist1[i])</span><br><span class="line">    reslist.append(res[<span class="number">1</span>])</span><br><span class="line">    streslist.append(res[<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">datalist=[]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">11</span>):</span><br><span class="line">    city=keylist1[i]</span><br><span class="line">    mention_st=len(streslist[i])</span><br><span class="line">    dic=&#123;<span class="string">&#x27;city&#x27;</span>:city,<span class="string">&#x27;mt_st&#x27;</span>:mention_st&#125;</span><br><span class="line">    datalist.append(dic)</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> jieba</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"></span><br><span class="line">Alist=[<span class="string">u&#x27;粤港澳大湾区&#x27;</span>,<span class="string">u&#x27;大湾区&#x27;</span>,<span class="string">u&#x27;湾区&#x27;</span>,<span class="string">u&#x27;前海&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> word <span class="keyword">in</span> Alist:</span><br><span class="line">    jieba.add_word(word)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> string <span class="keyword">import</span> punctuation</span><br><span class="line">add_punc=<span class="string">&#x27;，。、【 】 “”：；（）《》‘’&#123;&#125;？！⑦()、%^&gt;℃：.”“^-——=&amp;#@￥&#x27;</span></span><br><span class="line">stopword1=punctuation+add_punc</span><br><span class="line">stopword2=[<span class="string">u&#x27;的&#x27;</span>,<span class="string">u&#x27;等&#x27;</span>,<span class="string">u&#x27;和&#x27;</span>,<span class="string">u&#x27;发展&#x27;</span>,<span class="string">u&#x27;支持&#x27;</span>,<span class="string">u&#x27;在&#x27;</span>,<span class="string">u&#x27;－&#x27;</span>,<span class="string">u&#x27;推进&#x27;</span>,<span class="string">u&#x27;为&#x27;</span>,<span class="string">u&#x27;至&#x27;</span>,<span class="string">u&#x27;提升&#x27;</span>,<span class="string">u&#x27;研究&#x27;</span>,<span class="string">u&#x27;加快&#x27;</span>,<span class="string">u&#x27;探索&#x27;</span>,<span class="string">u&#x27;与&#x27;</span>,<span class="string">u&#x27;新&#x27;</span>,<span class="string">u&#x27;作用&#x27;</span>,<span class="string">u&#x27;增强&#x27;</span>,<span class="string">u&#x27;以&#x27;</span>,<span class="string">u&#x27;进一步&#x27;</span>,<span class="string">u&#x27;促进&#x27;</span>,<span class="string">u&#x27;及&#x27;</span>,<span class="string">u&#x27;具有&#x27;</span>,<span class="string">u&#x27;加强&#x27;</span>,<span class="string">u&#x27;开展&#x27;</span>,<span class="string">u&#x27;实施&#x27;</span>,<span class="string">u&#x27;并&#x27;</span>,<span class="string">u&#x27;到&#x27;</span>,<span class="string">u&#x27;更&#x27;</span>,<span class="string">u&#x27;形成&#x27;</span>,<span class="string">u&#x27;中&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cityst2word</span>(<span class="params">stlist</span>):</span></span><br><span class="line">    wordlist=[]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> stlist:</span><br><span class="line">        tm=jieba.cut(i)</span><br><span class="line">        st_word=[]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> tm:</span><br><span class="line">            <span class="keyword">if</span> i <span class="keyword">not</span> <span class="keyword">in</span> stopword1:</span><br><span class="line">                <span class="keyword">if</span> i <span class="keyword">not</span> <span class="keyword">in</span> stopword2:</span><br><span class="line">                    st_word.append(i)</span><br><span class="line">        wordlist.extend(st_word)</span><br><span class="line">    Cdf=Counter(wordlist)</span><br><span class="line">    df=pd.DataFrame.from_dict(Cdf,orient=<span class="string">&#x27;index&#x27;</span>,columns=[<span class="string">&#x27;times&#x27;</span>])</span><br><span class="line">    <span class="keyword">return</span> df,wordlist</span><br><span class="line"></span><br><span class="line">dflist=[]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">11</span>):</span><br><span class="line">    st=cityst2word(streslist[i])</span><br><span class="line">    filename=<span class="string">&#x27;output&#x27;</span>+str(i)+<span class="string">&#x27;.xls&#x27;</span></span><br><span class="line">    stmp=st[<span class="number">0</span>].sort_values([<span class="string">&#x27;times&#x27;</span>],ascending=<span class="literal">False</span>)</span><br><span class="line">    dflist.append(stmp)</span><br><span class="line">    <span class="comment">#stmp.to_excel(filename)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">11</span>):</span><br><span class="line">    datalist[i][<span class="string">&#x27;mt_wd&#x27;</span>]=dflist[i][<span class="string">&#x27;times&#x27;</span>][keylist1[i]]</span><br><span class="line"></span><br><span class="line">maindf=pd.DataFrame(datalist)</span><br><span class="line">maindf=maindf.sort_values(<span class="string">&#x27;mt_st&#x27;</span>,ascending=<span class="literal">False</span>)</span><br><span class="line"><span class="comment">#maindf.to_excel(&#x27;mainres.xls&#x27;)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> wordcloud <span class="keyword">as</span> wc</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line">font=<span class="string">r&quot;C:\WINDOWS\Fonts\simhei.ttf&quot;</span></span><br><span class="line">color_mask=np.array(Image.open(<span class="string">&#x27;map.jpg&#x27;</span>))</span><br><span class="line">cloud=wc.WordCloud( font_path=font,</span><br><span class="line">           background_color=<span class="string">&#x27;white&#x27;</span>, </span><br><span class="line">           max_words=<span class="number">20</span>,</span><br><span class="line">           color_func=<span class="keyword">lambda</span> *args, **kwargs:  (<span class="number">99</span>,<span class="number">162</span>,<span class="number">215</span>),</span><br><span class="line">           mask=color_mask,</span><br><span class="line">           max_font_size=<span class="number">180</span>,</span><br><span class="line">           random_state=<span class="number">30</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">11</span>):</span><br><span class="line">    dic=dflist[i].iloc[:<span class="number">20</span>].to_dict()[<span class="string">&#x27;times&#x27;</span>]</span><br><span class="line">    picname=datalist[i][<span class="string">&#x27;city&#x27;</span>]+<span class="string">&#x27;.jpg&#x27;</span></span><br><span class="line">    cloud.generate_from_frequencies(dic)</span><br><span class="line">    plt.imshow(cloud)</span><br><span class="line">    plt.axis(<span class="string">&#x27;off&#x27;</span>)</span><br><span class="line">    plt.savefig(picname)</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Wengyj
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://wengyj.github.io/2019/playsouthchinaplanseg2019/" title="粤港澳大湾区规划中的城市关键词">http://wengyj.github.io/2019/playsouthchinaplanseg2019/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D/" rel="tag"># 中文分词</a>
+              <a href="/tags/%E7%B2%A4%E6%B8%AF%E6%BE%B3%E5%A4%A7%E6%B9%BE%E5%8C%BA/" rel="tag"># 粤港澳大湾区</a>
+              <a href="/tags/%E8%A7%84%E5%88%92/" rel="tag"># 规划</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/economicspapereconometriclin2019/" rel="prev" title="实证检验的展开2">
+                  <i class="fa fa-chevron-left"></i> 实证检验的展开2
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/booknotemacaobritish2019/" rel="next" title="澳门与英国人">
+                  澳门与英国人 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wengyj</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({
+      el  : '#valine-comments',
+      path: "/2019/playsouthchinaplanseg2019/",
+    }, {"enable":true,"appId":"a8du6jfF6hsydDIgU0zzsoAn-gzGzoHsz","appKey":"aLbVejr5tVXlllYcnTCauB1h","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-cn","visitor":true,"comment_count":true,"recordIP":true,"serverURLs":null,"enableQQ":false,"requiredFields":["mail"]}
+    ));
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
