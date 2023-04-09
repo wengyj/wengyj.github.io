@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wengyj.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前几天坐在车站等车，突然有了一个想法，不确定性更大的情况下，低阶层的人是不是更有机会进入上层。当时一个大概的思路是这样的，由于不确定性很高，拥有更多信息的高阶层也很可能遭受重大损失，同时收益方差很大，所以少量的低阶层的人反而能够进入上层中。 不做具体的模型分析，就用python模拟一下，假设经济体中有100个人，其中上层30，下层70，这种阶层是固化的，比如只考虑血缘，上层永远比下层更有优势。具体">
+<meta property="og:type" content="article">
+<meta property="og:title" content="不确定性如何影响财富积累">
+<meta property="og:url" content="http://wengyj.github.io/2016/playuncertainty&wealth2016/index.html">
+<meta property="og:site_name" content="庭燎">
+<meta property="og:description" content="前几天坐在车站等车，突然有了一个想法，不确定性更大的情况下，低阶层的人是不是更有机会进入上层。当时一个大概的思路是这样的，由于不确定性很高，拥有更多信息的高阶层也很可能遭受重大损失，同时收益方差很大，所以少量的低阶层的人反而能够进入上层中。 不做具体的模型分析，就用python模拟一下，假设经济体中有100个人，其中上层30，下层70，这种阶层是固化的，比如只考虑血缘，上层永远比下层更有优势。具体">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://7sbyk8.com1.z0.glb.clouddn.com/img/uncertainty&wealth2016_pic1.png">
+<meta property="og:image" content="http://7sbyk8.com1.z0.glb.clouddn.com/img/uncertainty&wealth2016_pic2.png">
+<meta property="article:published_time" content="2016-12-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2016-12-30T15:33:32.000Z">
+<meta property="article:author" content="Wengyj">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="收入不平等">
+<meta property="article:tag" content="不确定性">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://7sbyk8.com1.z0.glb.clouddn.com/img/uncertainty&wealth2016_pic1.png">
+
+
+<link rel="canonical" href="http://wengyj.github.io/2016/playuncertainty&wealth2016/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://wengyj.github.io/2016/playuncertainty&wealth2016/","path":"2016/playuncertainty&wealth2016/","title":"不确定性如何影响财富积累"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>不确定性如何影响财富积累 | 庭燎</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">庭燎</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">阅读、回忆和记录</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Wengyj"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Wengyj</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">172</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://wengyj.github.io/2016/playuncertainty&wealth2016/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Wengyj">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="庭燎">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="不确定性如何影响财富积累 | 庭燎">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          不确定性如何影响财富积累
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2016-12-05 00:00:00" itemprop="dateCreated datePublished" datetime="2016-12-05T00:00:00+08:00">2016-12-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2016-12-30 23:33:32" itemprop="dateModified" datetime="2016-12-30T23:33:32+08:00">2016-12-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/R%E5%92%8C%E5%85%B6%E4%BB%96/" itemprop="url" rel="index"><span itemprop="name">R和其他</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2016/playuncertainty&wealth2016/" class="post-meta-item leancloud_visitors" data-flag-title="不确定性如何影响财富积累" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>前几天坐在车站等车，突然有了一个想法，不确定性更大的情况下，低阶层的人是不是更有机会进入上层。当时一个大概的思路是这样的，由于不确定性很高，拥有更多信息的高阶层也很可能遭受重大损失，同时收益方差很大，所以少量的低阶层的人反而能够进入上层中。</p>
+<p>不做具体的模型分析，就用python模拟一下，假设经济体中有100个人，其中上层30，下层70，这种阶层是固化的，比如只考虑血缘，上层永远比下层更有优势。具体的优势表现在，做选择的时候，下层需要先经过一个通道，才能进入选择环节。选择环节会使得财富上升或下降，但是不能进入选择环节，财富则会下降。</p>
+<span id="more"></span>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding: utf-8</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成100个个体，赋予初始财富</span></span><br><span class="line">idset=[]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">30</span>):</span><br><span class="line">    idv=&#123;<span class="string">&#x27;number&#x27;</span>:i+<span class="number">1</span>,<span class="string">&#x27;class&#x27;</span>:<span class="number">1</span>,<span class="string">&#x27;wealth&#x27;</span>:<span class="number">100</span>&#125;</span><br><span class="line">    idset.append(idv)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">70</span>):</span><br><span class="line">    idv=&#123;<span class="string">&#x27;number&#x27;</span>:i+<span class="number">31</span>,<span class="string">&#x27;class&#x27;</span>:<span class="number">0</span>,<span class="string">&#x27;wealth&#x27;</span>:<span class="number">100</span>&#125;</span><br><span class="line">    idset.append(idv)</span><br><span class="line">iddf=pd.DataFrame(idset)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下层的通道</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">flselect</span>(<span class="params">pp=<span class="number">0.5</span></span>):</span><br><span class="line">    res=<span class="number">0</span></span><br><span class="line">    cdt=random.random()</span><br><span class="line">    <span class="keyword">if</span> cdt&lt;pp:</span><br><span class="line">        res=<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="comment"># 选择环节</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">coreselect</span>(<span class="params">ps=<span class="number">0.4</span></span>):</span><br><span class="line">    res=<span class="number">0</span></span><br><span class="line">    cdt=random.random()</span><br><span class="line">    <span class="keyword">if</span> cdt&lt;ps:</span><br><span class="line">        res=<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">pof1=[<span class="number">2</span>,<span class="number">0.2</span>,<span class="number">0.2</span>,<span class="number">0.2</span>]</span><br><span class="line">pof2=[<span class="number">1.2</span>,<span class="number">0.8</span>,<span class="number">0.8</span>,<span class="number">0.8</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每期生成结果函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">Oneperiod</span>(<span class="params">diclist=idset,pof=pof1</span>):</span><br><span class="line">    Op=[]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">30</span>):</span><br><span class="line">        hp=coreselect()</span><br><span class="line">        w=diclist[i][<span class="string">&#x27;wealth&#x27;</span>]</span><br><span class="line">        w=w*pof[hp]</span><br><span class="line">        Op.append(w)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">70</span>):</span><br><span class="line">        w=diclist[i+<span class="number">30</span>][<span class="string">&#x27;wealth&#x27;</span>]</span><br><span class="line">        sw=flselect()</span><br><span class="line">        <span class="keyword">if</span> sw==<span class="number">1</span>:</span><br><span class="line">            hp=coreselect()</span><br><span class="line">            w=w*pof[hp]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            w=w*pof1[<span class="number">2</span>]</span><br><span class="line">        Op.append(w)</span><br><span class="line">    <span class="keyword">return</span> Op</span><br><span class="line"></span><br><span class="line"><span class="comment"># 模拟多期</span></span><br><span class="line">df=idset</span><br><span class="line">resset=pd.DataFrame(df)</span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">30</span>):</span><br><span class="line">    rightnow=Oneperiod(df)</span><br><span class="line"><span class="comment"># 低不确定性假设下：</span></span><br><span class="line"><span class="comment"># rightnow=Oneperiod(df,pof2)</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>):</span><br><span class="line">        df[i][<span class="string">&#x27;wealth&#x27;</span>]=rightnow[i]</span><br><span class="line">    vname=<span class="string">&#x27;wealth&#x27;</span>+<span class="built_in">str</span>(j+<span class="number">1</span>)</span><br><span class="line">    rnset=pd.DataFrame(df)</span><br><span class="line">    resset[vname]=rnset[<span class="string">&#x27;wealth&#x27;</span>]</span><br><span class="line"></span><br><span class="line">sortres=resset.sort_values(<span class="string">&#x27;wealth30&#x27;</span>)</span><br><span class="line"></span><br><span class="line">nx=<span class="number">30</span>-<span class="built_in">sum</span>(sortres[<span class="string">&#x27;class&#x27;</span>][<span class="number">70</span>:])</span><br><span class="line">nxl=[]</span><br><span class="line">bnxl=[]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">30</span>):</span><br><span class="line">    vname=<span class="string">&#x27;wealth&#x27;</span>+<span class="built_in">str</span>(i+<span class="number">1</span>)</span><br><span class="line">    sortres=resset.sort_values(vname)</span><br><span class="line">    nx=<span class="number">30</span>-<span class="built_in">sum</span>(sortres[<span class="string">&#x27;class&#x27;</span>][<span class="number">70</span>:])</span><br><span class="line">    bnx=<span class="number">5</span>-<span class="built_in">sum</span>(sortres[<span class="string">&#x27;class&#x27;</span>][<span class="number">95</span>:])</span><br><span class="line">    nxl.append(nx)</span><br><span class="line">    bnxl.append(bnx)</span><br><span class="line"></span><br><span class="line">nx30=pd.DataFrame(&#123;<span class="string">&#x27;nxl&#x27;</span>:nxl,<span class="string">&#x27;bnxl&#x27;</span>:bnxl&#125;)</span><br><span class="line">nx30.to_csv(<span class="string">&#x27;nx30.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>pof1是不确定性较大的一组设定，如果只考虑输出结果的解读，经过30期之后，绝对值上存活下来的是极少数。除了前9个，剩下个体的财富极小，前5位的占比从18、19期开始就占99%以上。下层个体要成为稳定的排名较高的个体还是有一定机会，进入前30的下层个体稳定在3个左右。但是前5从第6期开始就没有出现过下层个体。前5名的发展趋势很有趣，代表了几种不同特征的个体，一是平稳上升，很少有下滑，二是在某个时间下滑到较低水平，但是从某个时点开始又平稳增长，三是起起伏伏但保持一定水平。显然，不用通过通道是保证增长的重要因素。</p>
+<p><img src="http://7sbyk8.com1.z0.glb.clouddn.com/img/uncertainty&wealth2016_pic1.png" alt="pof1结果"></p>
+<p>pof2的不确定性更小，选择环节结果的差异更小。与高确定性情况相比确实有很大不同。首先，集中度尽管也在不断提高，但速度要缓慢很多，第30期也不过是0.5左右。其次，增长趋势更为平缓，没有出现pof1下那样快速的起伏，前5几乎与一定的规律增长。最重要的是，前30中没有任何下层个体，而且下层中财富最多的与上层中财富最少的也存在极为明显的区别。从时间变化上看，在前10期，下层个体偶尔会出现在财富前5中，但是从12期以后，即使前30是也不再出现下层个体。</p>
+<p><img src="http://7sbyk8.com1.z0.glb.clouddn.com/img/uncertainty&wealth2016_pic2.png" alt="pof2结果"></p>
+<p>以上的特点确实印证了本文最早的假设。但更准确地说，分配的结果有两种，高不确定情况下，资源集中在极为少数的个体中，通常这些个体是上层的，但是剩下的个体差异并不明显；低不确定的情况下，上层与下层之间显示出非常明显的断层，而在上层中财富尽管也有集中的趋势，但分配相对平均。那么问题来了，哪种情况下，社会更加稳定？</p>
+<p><em>展望</em><br>本文的模拟中一个重要的假设是阶层完全固化，实际中阶层总会通过一定形式打破，如科举取士是下层可以通过一定积累和努力，以一定概率进入上层，朝代更迭可以对阶层分布产生剧烈的冲击。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/%E6%94%B6%E5%85%A5%E4%B8%8D%E5%B9%B3%E7%AD%89/" rel="tag"># 收入不平等</a>
+              <a href="/tags/%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7/" rel="tag"># 不确定性</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2016/playEviewsstatespace2016/" rel="prev" title="Eviews状态空间模型季节调整">
+                  <i class="fa fa-chevron-left"></i> Eviews状态空间模型季节调整
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2016/lifereading032016/" rel="next" title="读书的事（三）">
+                  读书的事（三） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wengyj</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"a8du6jfF6hsydDIgU0zzsoAn-gzGzoHsz","app_key":"aLbVejr5tVXlllYcnTCauB1h","server_url":null,"security":false}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
+</html>
