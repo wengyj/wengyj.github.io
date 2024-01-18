@@ -149,7 +149,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">86</span>
+          <span class="site-state-item-count">87</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -160,7 +160,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">180</span>
+        <span class="site-state-item-count">184</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -177,6 +177,107 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://wengyj.github.io/2016/playEviewsstatespace2016/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Wengyj">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="庭燎">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 庭燎">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2016/playEviewsstatespace2016/" class="post-title-link" itemprop="url">Eviews状态空间模型季节调整</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2016-11-19 00:00:00" itemprop="dateCreated datePublished" datetime="2016-11-19T00:00:00+08:00">2016-11-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2016-12-10 22:41:36" itemprop="dateModified" datetime="2016-12-10T22:41:36+08:00">2016-12-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/R%E5%92%8C%E5%85%B6%E4%BB%96/" itemprop="url" rel="index"><span itemprop="name">R和其他</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2016/playEviewsstatespace2016/" class="post-meta-item leancloud_visitors" data-flag-title="Eviews状态空间模型季节调整" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><em>每次做一些不知所以然的时间序列处理都会拿Eviews出来折腾一下，放回去之后又其实什么都没搞懂。</em></p>
+<p>状态空间模型做季节调整，思路是将一个序列分解成时间趋势t1、季节波动t2和不规则因素t3。其中季节波动用三角函数拟合，时间因素和不规则因素用AR过程拟合，在Eviews中表示如下，c(*)是参数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@signal totalpt=t1+t2+t3+[var=exp(c(2))]</span><br><span class="line">@state t1=2*t1(-1)-t4(-1)+t5(-1)+[var=exp(c(3))]</span><br><span class="line">@state t4=t1(-1)+[var=exp(c(4))]</span><br><span class="line">@state t5=t5(-1)+[var=exp(c(5))]</span><br><span class="line">@state t2=t6(-1)+t8(-1)+t12(-1)+t14(-1)+t16(-1)+[var=exp(c(6))]</span><br><span class="line">@state t6=cos(0.262*c(1))*t6(-1)+sin(0.262*c(1))*t7(-1)+[var=exp(c(7))]</span><br><span class="line">@state t7=-sin(0.262*c(1))*t6(-1)+cos(0.262*c(1))*t7(-1)+[var=exp(c(8))]</span><br><span class="line">@state t8=cos(0.523*c(1))*t8(-1)+sin(0.523*c(1))*t9(-1)+[var=exp(c(9))]</span><br><span class="line">@state t9=-sin(0.523*c(1))*t6(-1)+cos(0.523*c(1))*t9(-1)+[var=exp(c(10))]</span><br><span class="line">@state t10=cos(0.785*c(1))*t10(-1)+sin(0.785*c(1))*t11(-1)+[var=exp(c(11))]</span><br><span class="line">@state t11=-sin(0.785*c(1))*t10(-1)+cos(0.785*c(1))*t11(-1)+[var=exp(c(12))]</span><br><span class="line">@state t12=cos(1.05*c(1))*t12(-1)+sin(1.05*c(1))*t13(-1)+[var=exp(c(13))]</span><br><span class="line">@state t13=-sin(1.05*c(1))*t12(-1)+cos(1.05*c(1))*t13(-1)+[var=exp(c(14))]</span><br><span class="line">@state t14=cos(1.31*c(1))*t14(-1)+sin(1.31*c(1))*t15(-1)+[var=exp(c(15))]</span><br><span class="line">@state t15=-sin(1.31*c(1))*t14(-1)+cos(1.31*c(1))*t15(-1)+[var=exp(c(16))]</span><br><span class="line">@state t16=cos(1.57*c(1))*t16(-1)+sin(1.57*c(1))*t17(-1)+[var=exp(c(17))]</span><br><span class="line">@state t17=-sin(1.57*c(1))*t16(-1)+cos(1.57*c(1))*t17(-1)+[var=exp(c(18))]</span><br><span class="line">@state t3=c(19)*t3(-1)+c(20)*t18(-1)+[var=exp(c(21))]</span><br><span class="line">@state t18=t3(-1)+[var=exp(c(22))]    </span><br></pre></td></tr></table></figure>
+
+<p>如果仅仅是这样，那也没什么好说的，点一点估计，结果出来了，Finished！但这时出现了两个问题，1）参数初值设定会改变结果，2）不指定初始值或随意指定，产生的分离序列会很奇怪：我采用的原始序列都是小于1的，拟合出来的趋势序列绝对值甚至出现几十上百的情况。</p>
+<p>在不懂原理的情况下怎么解决？后来在人大经济论坛上看到了一种思路。首先，将状态方程（所有state）后面的var项去掉，然后进行估计，根据结果可以产生t1-t18序列；其次，用产生的18个序列，还有原始序列，对所有state方程进行回归，如c(2)就可以用totalpt-(t1+t2+t3)的方差算出来，c(7)可以用t6,t6(-1),t7(-1)回归的残差平方和比样本数算出来，而c(1)取2；最后，把这些c(*)作为初值，增加一行，就可以得出比较理想的拟合序列了。</p>
+<pre><code>@param c(1) 2 c(2) -5 c(3) -9 c(4) -9 c(5) -9 c(6) -9 c(7) -10 c(8) -10 c(9) -10 c(10) -10 c(11) -10 c(12) -10 c(13) -10 c(14) -10 c(15) -10 c(16) -10 c(17) -10 c(18) -10 c(19) 0 c(20) 0 c(21) -19 c(22) -19
+</code></pre>
+<p>至于原理，以后有机会再研究。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -684,121 +785,6 @@
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://wengyj.github.io/2016/lifewancan2016/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Wengyj">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="庭燎">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 庭燎">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/lifewancan2016/" class="post-title-link" itemprop="url">晚餐</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2016-07-23 00:00:00" itemprop="dateCreated datePublished" datetime="2016-07-23T00:00:00+08:00">2016-07-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2016-07-24 01:03:10" itemprop="dateModified" datetime="2016-07-24T01:03:10+08:00">2016-07-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/2016/lifewancan2016/" class="post-meta-item leancloud_visitors" data-flag-title="晚餐" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>按照惯例写写话剧的评论，《晚餐》这出剧是希腊的剧本翻译过来的，看起来确实有许多不一样的地方。</p>
-<ul>
-<li><p>剧本是古希腊三联剧的续写，但是相比起印象中希腊悲剧常有的诸神和冲突，本剧的情节上几乎没有起伏。这出剧几乎只有一幕，从情绪上大致是将开场的设定推向一个最终的高潮。</p>
-</li>
-<li><p>特洛伊公主的叙述似乎想诉说战争带来的苦难，发动战争的罪恶，王后也有类似的表达。但是作为主题，这部分的内容太过单薄，三姐弟所纠结的是人伦惨剧与对命运的无力，从这个意义上，对战争的指责包括特洛伊公主这个人物的存在就显得有些突兀。</p>
-</li>
-<li><p>从主题上讲，死去的人选择放下，似乎只是对死去这个事实的承认；三姐弟陷入痛苦的根源，也许与战争类似，受到某种欲望的驱使，但是最终主导他们命运的却是对宿命的畏惧或是无能为力，这倒是有些古希腊的味道，但是欲望或者说动因在剧中并不明显，似乎逻辑上链接不上。</p>
-</li>
-<li><p>本剧贯穿的是一种人物纠结的内心世界，姐弟三人都在试图去探讨这种纠结，但最终没有从中走出来。如果说剧中有冲突的话，大概就是每个人物对曾经所做的后悔，更进一步说，在回忆过去中反思真实的内心，但是这些反思并没有得到任何解开的理由，所以最终归结于宿命。</p>
-</li>
-<li><p>如果说整个情节的发展是沿着——姐姐探求真相、姐弟陷入纠结无从解脱、姐姐终结诅咒——这样的线路发展，而死去的人是在暗示另外的一条路，同时也是暗示死去，似乎简单而有些合理。</p>
-</li>
-<li><p>古希腊的传说中经常会有预言或者诅咒，实际上中国也有类似的记录，国语中就有不少。但是如本剧这般最后决定命运的正是人物对诅咒的恐惧，这样是难以理解的，至少是难以想象存在更多内涵的，这大概是不同文化背景的问题。</p>
-</li>
-<li><p>说的演出本身，本剧基本只有一幕，情节发展并不明显又完全是用对话推动，尽管对话似乎饱含情感，对话内容的单薄——实在想不出更多的内涵——也使得整部剧显得平淡。</p>
-</li>
-<li><p>剧中死去的人可以听见活着的人的对话，活着的人却不能听见死去的人的话，又置于一个场景中，于是两组对话互相交织，感觉上是极为强烈的技巧性。</p>
-</li>
-<li><p>舞台采用铁链布景确实很能衬托人物的内心，正如被铁链缠起来一般。但有些地方就不太好理解，比如开场四个死去的人充满仪式感的出场，最后搬动两个柱子是做什么；特洛伊公主在剧情中出场不多，又不与其他人互动，但其中有一段时间摊坐在一旁，显得十分奇怪。</p>
-</li>
-<li><p>除了特洛伊公主，情人也是一个很奇怪的角色。从后面其他人的描述中似乎是一个智者，还与国王有过冲突，但是在晚餐开始前的对话中，又简直是戏剧中的丑角一般，无论如何不应该是这两种形象的叠加。</p>
-</li>
-</ul>
-
       
     </div>
 
